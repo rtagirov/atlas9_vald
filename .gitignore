@@ -1,0 +1,3 @@
+vald_parts
+vald_to_kurucz/*.dat
+kurucz_to_binary/*.dat
