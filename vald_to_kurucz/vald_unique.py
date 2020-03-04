@@ -1,20 +1,12 @@
 import pandas as pd
 import numpy as np
 
-import sys
-
-if not '/mnt/SSD/sim/python/src/aux/' in sys.path:
-
-    sys.path.append('/mnt/SSD/sim/python/src/aux/')
-
 import importlib
 
 import phys; importlib.reload(phys)
-import auxfunc; importlib.reload(auxfunc)
 
 from tqdm import tqdm
 
-#df = pd.read_csv('vald_short.dat')
 df = pd.read_csv('vald.dat')
 
 ei = df.iloc[:, 0].tolist()
@@ -28,7 +20,7 @@ rad = []
 stark = []
 waals = []
 
-for i in tqdm(range(len(df)), ncols = auxfunc.term_width(), desc = 'Converting'):
+for i in tqdm(range(len(df)), desc = 'Converting'):
 
     d = ei[i].replace("'", "")
 
