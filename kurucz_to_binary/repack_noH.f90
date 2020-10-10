@@ -10,6 +10,8 @@
 
       integer, allocatable, dimension(:) :: v11
 
+      character(len = 80) :: ldat, lbin
+
 !      integer(kind = 4) :: n_lines, l, block_size, n_blocks, n_rem_lin, m, i, nl, e, s, j
       integer(kind = 4) :: n_lines, l, block_size, n_blocks, m, i, nl, e, s, j
 
@@ -21,8 +23,12 @@
 
       equivalence (pack1(1, 1), pack2(1, 1))
 
+      ldat = 'vald_kurucz_merged.dat'
+      lbin = 'vald_kurucz_merged.bin'
+
 !      n_lines = num_of_lines('Kurucz_comb_air_8.97670nm_to_10000nm.dat')
-      n_lines = num_of_lines('vald_in_kurucz_format.dat')
+!      n_lines = num_of_lines('vald_in_kurucz_format.dat')
+      n_lines = num_of_lines(ldat)
 
       print*, 'n_lines = ', n_lines
 
@@ -40,7 +46,8 @@
       allocate(v11(n_lines))
 
 !      open(unit = 1, file = 'Kurucz_comb_air_8.97670nm_to_10000nm.dat', action = 'read')
-      open(unit = 1, file = 'vald_in_kurucz_format.dat', action = 'read')
+!      open(unit = 1, file = 'vald_in_kurucz_format.dat', action = 'read')
+      open(unit = 1, file = ldat, action = 'read')
 
       print*, 'Reading the lines...'
 
@@ -50,8 +57,7 @@
 
       print*, 'Writing the lines...'
 
-!      open(unit = 2, file = 'nessylines_noH.bin', type = 'new', form = 'unformatted', recordtype = 'fixed', blocksize = 32000, recl = 8000)
-      open(unit = 2, file = 'vald_in_kurucz_format_noH.bin', type = 'new', form = 'unformatted', recordtype = 'fixed', blocksize = 32000, recl = 8000)
+      open(unit = 2, file = lbin, type = 'new', form = 'unformatted', recordtype = 'fixed', blocksize = 32000, recl = 8000)
 
       block_size = 2000
 
@@ -92,11 +98,17 @@
 
              pack2(8, l) = ic(gw(i))
 
+             if (lic(E_low(i)) <= 1.0) write(*, '(A,2(1x,I9),2(1x,f7.3))'), 'E_low', i, lic(E_low(i)), E_low(i), gf(i)
+             if (ic(gf(i))     <= 1.0) write(*, '(A,2(1x,I9),  1x,f7.3)'),  'gf',    i, ic(gf(i)),     gf(i)
+             if (ic(gr(i))     <= 1.0) write(*, '(A,2(1x,I9),2(1x,f7.3))'), 'gr',    i, ic(gr(i)),     gr(i), gf(i)
+             if (ic(gs(i))     <= 1.0) write(*, '(A,2(1x,I9),2(1x,f7.3))'), 'gs',    i, ic(gs(i)),     gs(i), gf(i)
+             if (ic(gw(i))     <= 1.0) write(*, '(A,2(1x,I9),2(1x,f7.3))'), 'gw',    i, ic(gw(i)),     gw(i), gf(i)
+
              if (l .eq. block_size .or. i .eq. n_lines) then
 
                 m = m + 1
 
-                print*, m, ' blocks written...'
+!                print*, m, ' blocks written...'
 
 !                if (i .eq. n_lines .and. n_rem_lin .ne. 0) pack1(:, n_rem_lin + 1 : 2000) = 0
 

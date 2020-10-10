@@ -1,4 +1,12 @@
 vald_parts
 vald_to_kurucz/vald_unique.dat
+vald_to_kurucz/wvl_comp.dat
 vald_to_kurucz/vald_in_kurucz_format.dat
 kurucz_to_binary/*.dat
+kurucz_to_binary/*.dat.*
+kurucz_to_binary/*.bin
+kurucz_to_binary/*.bin.*
+kurucz_to_binary/*.npz
+kurucz_to_binary/*.exe
+kurucz_to_binary/*.mod
+kurucz_to_binary/*.o

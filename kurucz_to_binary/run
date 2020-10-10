@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+rm *.mod *.o *.exe
+rm nessylines_noH.bin.london.25.06.20 
+
+ifort -c fileoper.f90 repack_noH.f90
+
+ifort fileoper.o repack_noH.o -o repack_noH.exe
+
+./repack_noH.exe

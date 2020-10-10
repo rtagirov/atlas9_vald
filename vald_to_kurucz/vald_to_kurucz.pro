@@ -1,4 +1,4 @@
-function vaclambda, airlambda
+function vaclambda1, airlambda
 
 ; translate airlambda to the vacuum
 ; Wavelengths should be in A
@@ -13,10 +13,21 @@ return, increase * airlambda
 
 end
 
+function vaclambda2, airlambda
+
+s = 1.0e+4 / airlambda
+
+n = 1.0 + 0.00008336624212083 + 0.02408926869968 / (130.1065924522 - s^2.0) + 0.0001599740894897 / (38.92568793293 - s^2.0)
+
+return, n * airlambda
+
+end
+
 pro convert
 
 openr, lun1, 'vald_unique.dat',           /get_lun
 openw, lun2, 'vald_in_kurucz_format.dat', /get_lun
+openw, lun3, 'wvl_comp.dat',              /get_lun
 
 ;mendeleev = ['H ','He','Li','Be','B ','C ','N ','O ','F ','Ne','Na','Mg','Al','Si', $
 ;             'P ','S ','Cl','Ar','K ','Ca','Sc','Ti','V ','Cr','Mn','Fe','Co','Ni','Cu','Zn']
@@ -47,23 +58,34 @@ while (i le Nlines - 1) do begin
 
 ;       kurnum = num + 0.01 * ion
 
-       if (wavh le 2000.) then wav = wavh
+;       if (wavh le 2000.) then wav1 = wavh
+       if (wavh le 2000.) then wav2 = wavh
 
-       if (wavh gt 2000.) then wav = vaclambda(wavh)
+       if (wavh gt 2000.) then begin
 
-       Eup = exch * evtocm + 1.d8 / wav
+            wav1 = vaclambda1(wavh)
+            wav2 = vaclambda2(wavh)
+
+            printf, lun3, wavh, wav1, wav2
+
+       endif
+
+;       Eup = exch * evtocm + 1.d8 / wav1
+       Eup = exch * evtocm + 1.d8 / wav2
 
        if (gfh gt -16.3) then begin
 
-            printf, lun2, FORMAT = form2, wav / 10., kurnum, gfh, exch * evtocm, 0., Eup, 0., radh, starkh, waalsh, 0
+;            printf, lun2, FORMAT = form2, wav1 / 10., kurnum, gfh, exch * evtocm, 0., Eup, 0., radh, starkh, waalsh, 0
+            printf, lun2, FORMAT = form2, wav2 / 10., kurnum, gfh, exch * evtocm, 0., Eup, 0., radh, starkh, waalsh, 0
 
        endif
  
-       i = i + 1.
+       i = i + 1
 
 endwhile
 
 free_lun, lun1
 free_lun, lun2
+free_lun, lun3
 
 end
