@@ -10,3 +10,4 @@ kurucz_to_binary/*.npz
 kurucz_to_binary/*.exe
 kurucz_to_binary/*.mod
 kurucz_to_binary/*.o
+*.swp
