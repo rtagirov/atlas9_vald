@@ -25,16 +25,16 @@ end
 
 pro convert
 
-openr, lun1, 'vald_unique.dat',           /get_lun
-openw, lun2, 'vald_in_kurucz_format.dat', /get_lun
-openw, lun3, 'wvl_comp.dat',              /get_lun
+openr, lun1, 'vald_unique_first_column_converted.dat', /get_lun
+openw, lun2, 'vald_in_kurucz_format.dat',              /get_lun
+openw, lun3, 'wvl_comp.dat',                           /get_lun
 
 ;mendeleev = ['H ','He','Li','Be','B ','C ','N ','O ','F ','Ne','Na','Mg','Al','Si', $
 ;             'P ','S ','Cl','Ar','K ','Ca','Sc','Ti','V ','Cr','Mn','Fe','Co','Ni','Cu','Zn']
 
 evtocm = 8065.5447
 
-Nlines = file_lines('vald_unique.dat')
+Nlines = file_lines('vald_unique_first_column_converted.dat')
 
 ;des = '      '
 

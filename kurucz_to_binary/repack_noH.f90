@@ -23,8 +23,10 @@
 
       equivalence (pack1(1, 1), pack2(1, 1))
 
-      ldat = 'vald_kurucz_merged.dat'
-      lbin = 'vald_kurucz_merged.bin'
+!      ldat = 'vald_kurucz_merged.dat'
+!      lbin = 'vald_kurucz_merged.bin'
+      ldat = 'vald_in_kurucz_format.dat'
+      lbin = 'vald.bin'
 
 !      n_lines = num_of_lines('Kurucz_comb_air_8.97670nm_to_10000nm.dat')
 !      n_lines = num_of_lines('vald_in_kurucz_format.dat')

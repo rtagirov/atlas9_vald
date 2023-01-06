@@ -35,7 +35,9 @@ ptable = {'H':  {'atnum': 1,  'atmass': 1.0080},
           'Co': {'atnum': 27, 'atmass': 58.933},
           'Ni': {'atnum': 28, 'atmass': 58.693},
           'Cu': {'atnum': 29, 'atmass': 63.546},
-          'Zn': {'atnum': 30, 'atmass': 65.380}}
+          'Zn': {'atnum': 30, 'atmass': 65.380},
+          'Sr': {'atnum': 38, 'atmass': 87.620},
+          'Y':  {'atnum': 39, 'atmass': 88.906}}
 
 # refractive index of water and steam as a function of 
 # density (kg / m^-3),

@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 
 rm *.mod *.o *.exe
-rm nessylines_noH.bin.london.25.06.20 
+#rm nessylines_noH.bin.london.25.06.20 
+rm -f vald.bin
 
 ifort -c fileoper.f90 repack_noH.f90
 
